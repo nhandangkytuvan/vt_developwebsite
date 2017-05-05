@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use App\Events\UserOnlineEvent;
 use App\User;
 use App\Online;
 use Session;
@@ -30,13 +31,7 @@ class UserController extends Controller{
 					    ['user_id' => $user->id],
 					    ['status' => 1]
 					);
-	                //pusher
-	                $pusher = App::make('pusher');
-		            $pusher->trigger( 
-		                'active-channel',
-		                'online-event', 
-		                ['user_name'=>$user->user_name,'user_id'=>$user->id,]
-		            );
+		            event(new UserOnlineEvent($user,'online'));
 		            //
 	                Session::flash('success','Đăng nhập thành công.');
 	                return redirect('user/post/index');

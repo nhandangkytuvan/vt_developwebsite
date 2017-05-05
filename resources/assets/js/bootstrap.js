@@ -41,5 +41,5 @@ Vue.http.interceptors.push((request, next) => {
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
-//     key: 'your-pusher-key'
+//     key: '6f9b209ae778821b0ef1'
 // });

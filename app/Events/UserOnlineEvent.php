@@ -9,24 +9,20 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class UserLoginEvent
+class UserOnlineEvent implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
-    public $action_type;
-    public $user_name;
-    public $user_id;
-    public $content;
+    public $user;
+    public $status;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($action_type,$user_name,$user_id,$content)
+    public function __construct($user,$status)
     {
-        $this->action_type = $action_type;
-        $this->user_name = $user_name;
-        $this->user_id = $user_id;
-        $this->content = $content;
+        $this->user = $user;
+        $this->status = $status;
     }
 
     /**
@@ -36,6 +32,10 @@ class UserLoginEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('active-channel');
+        return ['active-channel'];
+    }
+    public function broadcastAs()
+    {
+        return 'online-event';
     }
 }

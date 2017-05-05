@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\UserLoginEvent;
+use App\Events\UserOnlineEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-
-class UserLoginListener
+class UserOnlineListener
 {
     /**
      * Create the event listener.
@@ -24,7 +23,7 @@ class UserLoginListener
      * @param  UserLoginEvent  $event
      * @return void
      */
-    public function handle(UserLoginEvent $event)
+    public function handle(UserOnlineEvent $event)
     {
         //
     }

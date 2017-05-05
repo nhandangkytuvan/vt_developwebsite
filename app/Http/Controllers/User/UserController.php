@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
+use App\Events\UserOnlineEvent;
 use App\User;
 use App\Setting;
 use App\Online;
@@ -34,14 +34,7 @@ class UserController extends Controller{
 		    ['user_id' => $user->id],
 		    ['status' => 0]
 		);
-        //pusher
-        $pusher = App::make('pusher');
-        $pusher->trigger( 
-            'active-channel',
-            'offline-event', 
-            ['user_name'=>$user->user_name,'user_id'=>$user->id,]
-        );
-        //
+		event(new UserOnlineEvent($user,'offline'));
 		Session::forget('user');
 		Session::flash('info','Hẹn gặp lại.');
 		return redirect('/');
