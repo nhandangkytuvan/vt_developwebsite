@@ -122,10 +122,10 @@
         </div>
     </main>
     @if(Session::get('user'))
-    <div class="menuChat">
-        <div class="panel panel-default action">
+    <div class="realtime">
+        <div class="panel panel-default log">
             <div class="panel-heading">Hoạt động</div>
-            <ul class="list-group" id="list-action">
+            <ul class="list-group" id="list-log">
             </ul>
         </div>
         <div class="panel panel-default online">

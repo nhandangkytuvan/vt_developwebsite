@@ -6,6 +6,7 @@ use App\Events\UserLogEvent;
 use App\Post;
 use App\User;
 use App\Term;
+use App\Log;
 use File;
 use Gate;
 use Session;
@@ -68,12 +69,12 @@ class PostController extends Controller{
             }
             if($post->save()){
                 //event
-                $log = Log::create(
-                    ['user_id' => $user->id],
-                    ['log_action' => 'edit'],
-                    ['log_content' => $post->post_name],
-                );
-                event(new UserLogEvent($log,'edit'));
+                $log = Log::create([
+                    'user_id' => $user->id,
+                    'log_action' => 'edit',
+                    'log_content' => $post->post_name,
+                ]);
+                event(new UserLogEvent($log));
                 //
                 Session::flash('success','Sửa thành công.');
                 return redirect('user/post/edit/'.$post->id);
@@ -140,12 +141,12 @@ class PostController extends Controller{
                 Session::flash('success','Xóa thành công.');
                 File::delete(public_path().'/img/'.$post->post_avatar);
                 //event
-                $log = Log::create(
-                    ['user_id' => $user->id],
-                    ['log_action' => 'delete'],
-                    ['log_content' => $post->post_name];
-                );
-                event(new UserLogEvent($log,'delete'));
+                $log = Log::create([
+                    'user_id' => $user->id,
+                    'log_action' => 'edit',
+                    'log_content' => $post->post_name,
+                ]);
+                event(new UserLogEvent($log));
                 //
                 return redirect('user/post/index');
             }else{

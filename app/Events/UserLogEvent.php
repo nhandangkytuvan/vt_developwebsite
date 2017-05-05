@@ -9,20 +9,20 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class UserLogEvent
+class UserLogEvent implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
     public $log;
-    public $action;
+    public $user_name;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($log,$action)
+    public function __construct($log)
     {
         $this->log = $log;
-        $this->action = $action;
+        $this->user_name = $log->user->user_name;
     }
 
     /**
