@@ -3,6 +3,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Setting;
 use App\Online;
+use App\Log;
 use View;
 use Session;
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(){
         View::share('setting',Setting::first());
         View::share('onlines',Online::get());
+        View::share('logs',Log::limit(10)->get());
     }
     /**
      * Register any application services.

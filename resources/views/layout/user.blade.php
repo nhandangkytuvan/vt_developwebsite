@@ -126,6 +126,11 @@
         <div class="panel panel-default log">
             <div class="panel-heading">Hoạt động</div>
             <ul class="list-group" id="list-log">
+                @foreach($logs as $log)
+                    <li class="list-group-item">
+                        <p>{{ $log->user->user_name }} <span class="badge">{{ $log->log_action }}</span> {{ $log->log_content }}</p>
+                    </li>
+                @endforeach
             </ul>
         </div>
         <div class="panel panel-default online">
