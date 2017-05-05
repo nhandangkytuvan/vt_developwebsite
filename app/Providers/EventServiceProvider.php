@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\UserOnlineEvent' => [
             'App\Listeners\UserOnlineListener',
+        ],
+        'App\Events\UserLogEvent' => [
+            'App\Listeners\UserLogListener',
         ]
     ];
 

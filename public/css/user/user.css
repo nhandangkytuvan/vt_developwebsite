@@ -61,7 +61,7 @@ body{
 .list-group-item.active a{color: white;}
 .form-control,.label,.input-group-addon,.btn{border-radius: 0;}
 /**/
-.menuChat{position: fixed;right: 0;top:50px;width: 250px;height: 100%;z-index: 999;}
+.menuChat{position: fixed;right: 0;top:0px;width: 250px;height: 100%;z-index: 999;}
 .menuChat >div{border-right: none;border-radius: 0;}
 .menuChat >div.action,.menuChat >div.online{height: 50%;margin-bottom: 0;border-bottom: none;}
 .menuChat >div i{font-size: 12px;}
