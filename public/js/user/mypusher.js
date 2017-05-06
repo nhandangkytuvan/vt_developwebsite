@@ -23,18 +23,27 @@ $(document).ready(function() {
     });
     channel.bind('log-event', function(data) {
         var elul = $('#list-log');
-        var ellabel = $("<label></label>");
-        if(data.log.log_action=='edit'){
-            var eli = $("<i></i>").addClass('glyphicon glyphicon-edit');
-            ellabel.addClass('label label-success').append(data.user_name+' ',eli,' ');
+        var domHtml = '<li class="list-group-item" id="post_'+data.log.post_id+'">'+
+            '<div class="clearfix">'+
+                '<div class="pull-left">'+
+                    '<label class="label label-success"><span class="glyphicon glyphicon-user"></span> '+data.log.user_name+' </label>'+
+                '</div>'+
+                '<div class="pull-right">'+
+                    '<a href="#"><span class="badge"></span><span class="glyphicon glyphicon-'+data.log.log_action+'"></span></a>'+
+                '</div>'+
+            '</div>'+
+            '<p>'+
+                data.log.log_content+
+            '</p>'+
+        '</li>';
+        var elli = $(domHtml);
+
+        if($('#list-log li#post_'+data.log.post_id).length){
+            var number_edit = $('#list-log li#post_'+data.log.post_id+' div.pull-right a span.badge').text();
+            $('#list-log li#post_'+data.log.post_id+' div.pull-right a span.badge').text(Number(number_edit,10) + 1);
+        }else{
+            elli.hide();
+            elul.prepend(elli).find(elli).slideDown();
         }
-        if(data.log.log_action=='delete'){
-            var eli = $("<i></i>").addClass('glyphicon glyphicon-trash');
-            ellabel.addClass('label label-danger').append(data.user_name+' ',eli,' ');
-        }
-        var elp = $("<p></p>").append(ellabel,data.log.log_content);
-        var elli = $("<li></li>").addClass('list-group-item');
-        elli.append(elp).hide();
-        elul.prepend(elli).find(elli).slideDown();
     });
 });

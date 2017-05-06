@@ -68,7 +68,7 @@
         @foreach($data['posts'] as $key => $post)
         <tr>
             <td>{{ $post->id }}</td>
-            <td><a href="{{ MyAPI::getUrlPostObj($post) }}">{{ $post->post_name }}</a></td>
+            <td post-id="{{ $post->id }}"><a href="{{ MyAPI::getUrlPostObj($post) }}">{{ $post->post_name }}</a></td>
             <td><a href="{{ MyAPI::getUrlTermObj($post->term) }}">{{ $post->term->term_name }}</a></td>
             <td>
                 <div class="radio {{ $post->post_status == 1 ? 'radio-success' : 'radio-default' }} radio-inline">

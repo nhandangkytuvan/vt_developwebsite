@@ -67,3 +67,7 @@ body{
 .realtime >div.online{height: 35%;margin-bottom: 0;border-bottom: none;}
 .realtime >div i{font-size: 12px;}
 .realtime >div i.active{color: #5cb85c;}
+.realtime >div.log li p{margin-bottom: 0;font-size: 14px;color: #5d5959;margin-top: 5px;}
+.realtime >div.log li label{border-radius: 3px;}
+.realtime >div.log li.list-group-item div.pull-right span.glyphicon.glyphicon-edit{top: 6px;}
+.realtime >div.log li .badge{background-color: red;}

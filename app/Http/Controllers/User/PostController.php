@@ -54,6 +54,8 @@ class PostController extends Controller{
         $log->user_id = $user->id;
         $log->log_action = 'edit';
         $log->log_content = $post->post_name;
+        $log->post_id = $post->id;
+        $log->user_name = $user->user_name;
 
         if($request->isMethod('post')){
             // if (Gate::forUser($user)->denies('edit-post', $post)) {
@@ -77,7 +79,6 @@ class PostController extends Controller{
             if($post->save()){
                 //event
                 $log = Log::create((array)$log);
-                event(new UserLogEvent($log,$user->user_name));
                 //
                 Session::flash('success','Sửa thành công.');
                 return redirect('user/post/edit/'.$post->id);
@@ -147,7 +148,7 @@ class PostController extends Controller{
                 //event
                 $log = Log::create([
                     'user_id' => $user->id,
-                    'log_action' => 'edit',
+                    'log_action' => 'trash',
                     'log_content' => $post->post_name,
                 ]);
                 event(new UserLogEvent($log));

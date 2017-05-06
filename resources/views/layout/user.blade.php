@@ -128,7 +128,17 @@
             <ul class="list-group" id="list-log">
                 @foreach($logs as $log)
                     <li class="list-group-item">
-                        <p>{{ $log->user->user_name }} <span class="badge">{{ $log->log_action }}</span> {{ $log->log_content }}</p>
+                        <div class="clearfix">
+                            <div class="pull-left">
+                                <label class="label label-success"><span class="glyphicon glyphicon-user"></span> {{ $log->user->user_name }}</label>
+                            </div>
+                            <div class="pull-right">
+                                <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
+                            </div>
+                        </div>
+                        <p>
+                            {{ $log->log_content }}
+                        </p>
                     </li>
                 @endforeach
             </ul>
