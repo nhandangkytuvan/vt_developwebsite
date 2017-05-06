@@ -71,3 +71,4 @@ body{
 .realtime >div.log li label{border-radius: 3px;}
 .realtime >div.log li.list-group-item div.pull-right span.glyphicon.glyphicon-edit{top: 6px;}
 .realtime >div.log li .badge{background-color: red;}
+.realtime >div.log li.list-group-item div.pull-right span.time{font-size: 13px;color: #565656;padding-right: 10px;vertical-align: -2px;}

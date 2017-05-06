@@ -54,6 +54,7 @@ class PostController extends Controller{
         $log->user_id = $user->id;
         $log->log_action = 'edit';
         $log->log_content = $post->post_name;
+        $log->log_time = date('m.d-H:i');
         $log->post_id = $post->id;
         $log->user_name = $user->user_name;
 

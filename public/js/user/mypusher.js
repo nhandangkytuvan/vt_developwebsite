@@ -29,7 +29,7 @@ $(document).ready(function() {
                     '<label class="label label-success"><span class="glyphicon glyphicon-user"></span> '+data.log.user_name+' </label>'+
                 '</div>'+
                 '<div class="pull-right">'+
-                    '<a href="#"><span class="badge"></span><span class="glyphicon glyphicon-'+data.log.log_action+'"></span></a>'+
+                    '<a href="#"><span class="time">'+data.log.log_time+'</span><span class="glyphicon glyphicon-'+data.log.log_action+'"></span></a>'+
                 '</div>'+
             '</div>'+
             '<p>'+
@@ -38,9 +38,11 @@ $(document).ready(function() {
         '</li>';
         var elli = $(domHtml);
 
-        if($('#list-log li[user-id='+data.+']').length){
-            var number_edit = $('#list-log li#post_'+data.log.post_id+' div.pull-right a span.badge').text();
-            $('#list-log li#post_'+data.log.post_id+' div.pull-right a span.badge').text(Number(number_edit,10) + 1);
+        if($('#list-log li[user-id='+data.log.user_id+']').length){
+            //var number_edit = $('#list-log li#post_'+data.log.post_id+' div.pull-right a span.badge').text();
+            //$('#list-log li#post_'+data.log.post_id+' div.pull-right a span.badge').text(Number(number_edit,10) + 1);
+            $('#list-log li[user-id='+data.log.user_id+'] span.time').text(data.log.log_time);
+            $('#list-log li[user-id='+data.log.user_id+'] p').text(data.log.log_content);
         }else{
             elli.hide();
             elul.prepend(elli).find(elli).slideDown();

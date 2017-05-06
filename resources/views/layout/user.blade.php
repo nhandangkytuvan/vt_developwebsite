@@ -133,7 +133,7 @@
                                 <label class="label label-success"><span class="glyphicon glyphicon-user"></span> {{ $log->user->user_name }}</label>
                             </div>
                             <div class="pull-right">
-                                <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a href="#"><span class="time">{{ date('d.m - H:i',strtotime($log->updated_at)) }}</span><span class="glyphicon glyphicon-edit"></span></a>
                             </div>
                         </div>
                         <p>{{ $log->log_content }}</p>
