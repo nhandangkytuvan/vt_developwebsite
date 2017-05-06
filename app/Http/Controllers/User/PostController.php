@@ -11,6 +11,7 @@ use File;
 use Gate;
 use Session;
 use DB;
+use stdClass;
 class PostController extends Controller{
     public function create(Request $request){
         $user = Session::get('user');
@@ -48,6 +49,12 @@ class PostController extends Controller{
         $user = Session::get('user');
         $terms = Term::get();
         $post = Post::find($post_id);
+        //event
+        $log = new stdClass;
+        $log->user_id = $user->id;
+        $log->log_action = 'edit';
+        $log->log_content = $post->post_name;
+
         if($request->isMethod('post')){
             // if (Gate::forUser($user)->denies('edit-post', $post)) {
             //     Session::flash('error','Bài viết không phải của bạn.');
@@ -69,12 +76,8 @@ class PostController extends Controller{
             }
             if($post->save()){
                 //event
-                $log = Log::create([
-                    'user_id' => $user->id,
-                    'log_action' => 'edit',
-                    'log_content' => $post->post_name,
-                ]);
-                event(new UserLogEvent($log));
+                $log = Log::create((array)$log);
+                event(new UserLogEvent($log,$user->user_name));
                 //
                 Session::flash('success','Sửa thành công.');
                 return redirect('user/post/edit/'.$post->id);
@@ -83,6 +86,7 @@ class PostController extends Controller{
                 return back();
             }
         }else{
+            event(new UserLogEvent($log,$user->user_name));
             $data['post'] = $post;
             $data['terms'] = $terms;
             return view('user.post.edit',['data'=>$data]); 
