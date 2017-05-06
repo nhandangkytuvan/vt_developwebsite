@@ -21,7 +21,7 @@ $(document).ready(function() {
             elul.prepend(elli).find(elli).slideDown();
         }
     });
-    channel.bind('log-event', function(data) {
+    channel.bind('editPostEvent', function(data) {
         var elul = $('#list-log');
         var domHtml = '<li class="list-group-item" id="post_'+data.log.post_id+'">'+
             '<div class="clearfix">'+
@@ -38,12 +38,17 @@ $(document).ready(function() {
         '</li>';
         var elli = $(domHtml);
 
-        if($('#list-log li#post_'+data.log.post_id).length){
+        if($('#list-log li[user-id='+data.+']').length){
             var number_edit = $('#list-log li#post_'+data.log.post_id+' div.pull-right a span.badge').text();
             $('#list-log li#post_'+data.log.post_id+' div.pull-right a span.badge').text(Number(number_edit,10) + 1);
         }else{
             elli.hide();
             elul.prepend(elli).find(elli).slideDown();
         }
+        //
+        $('table tr td[post-id='+data.log.post_id+']').attr('user-id',data.log.user_id).append('<label class="label label-danger  pull-right">'+data.log.user_name+'</label>');
+    });
+    channel.bind('indexPostEvent', function(data) {
+        $('table tr td[user-id='+data.log.user_id+'] label').remove();
     });
 });

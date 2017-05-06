@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\UserLogEvent;
+use App\Events\PostEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserLogListener
+class PostListener
 {
     /**
      * Create the event listener.
@@ -24,7 +24,7 @@ class UserLogListener
      * @param  UserLogEvent  $event
      * @return void
      */
-    public function handle(UserLogEvent $event)
+    public function handle(PostEvent $event)
     {
         //
     }

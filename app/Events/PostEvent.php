@@ -8,20 +8,19 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-class UserLogEvent implements ShouldBroadcast
+class PostEvent implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
     public $log;
-    public $user_name;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($log,$user_name)
+    public function __construct($log)
     {
         $this->log = $log;
-        $this->user_name = $user_name;
+
     }
 
     /**
@@ -36,6 +35,6 @@ class UserLogEvent implements ShouldBroadcast
     }
     public function broadcastAs()
     {
-        return 'log-event';
+        return $this->log->log_action.'PostEvent';
     }
 }

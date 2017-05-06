@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Events\UserLogEvent;
+use App\Events\PostEvent;
 use App\Post;
 use App\User;
 use App\Term;
@@ -77,9 +77,6 @@ class PostController extends Controller{
                 }
             }
             if($post->save()){
-                //event
-                $log = Log::create((array)$log);
-                //
                 Session::flash('success','Sửa thành công.');
                 return redirect('user/post/edit/'.$post->id);
             }else{
@@ -87,16 +84,28 @@ class PostController extends Controller{
                 return back();
             }
         }else{
-            event(new UserLogEvent($log,$user->user_name));
+            Log::updateOrCreate(
+                ['user_id'=>$log->user_id],
+                ['log_action'=>'edit','log_content'=>$log->log_content]
+            );
+            event(new PostEvent($log));
             $data['post'] = $post;
             $data['terms'] = $terms;
             return view('user.post.edit',['data'=>$data]); 
         }
     }
     public function index(Request $request){
+        $user = Session::get('user');
         $users = User::get();
         $terms = Term::get();
         $posts = Post::orderby('id','desc');
+        //even
+        $log = new stdClass;
+        $log->user_id = $user->id;
+        $log->log_action = 'index';
+        $log->user_name = $user->user_name;
+        event(new PostEvent($log));
+
         if($request->input('post_name')){
             $posts = $posts->where('post_name','like','%'.$request->input('post_name').'%');
         }
@@ -146,12 +155,11 @@ class PostController extends Controller{
                 Session::flash('success','Xóa thành công.');
                 File::delete(public_path().'/img/'.$post->post_avatar);
                 //event
-                $log = Log::create([
-                    'user_id' => $user->id,
-                    'log_action' => 'trash',
-                    'log_content' => $post->post_name,
-                ]);
-                event(new UserLogEvent($log));
+                Log::updateOrCreate(
+                    ['user_id'=>$log->user_id],
+                    ['log_action'=>'trash','log_content'=>$log->log_content]
+                );
+                event(new PostEvent($log));
                 //
                 return redirect('user/post/index');
             }else{

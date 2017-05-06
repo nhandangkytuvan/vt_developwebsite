@@ -127,7 +127,7 @@
             <div class="panel-heading">Hoạt động</div>
             <ul class="list-group" id="list-log">
                 @foreach($logs as $log)
-                    <li class="list-group-item">
+                    <li class="list-group-item" user-id="{{ $log->user_id }}">
                         <div class="clearfix">
                             <div class="pull-left">
                                 <label class="label label-success"><span class="glyphicon glyphicon-user"></span> {{ $log->user->user_name }}</label>
@@ -136,9 +136,7 @@
                                 <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
                             </div>
                         </div>
-                        <p>
-                            {{ $log->log_content }}
-                        </p>
+                        <p>{{ $log->log_content }}</p>
                     </li>
                 @endforeach
             </ul>
