@@ -59,7 +59,7 @@ body{
 .material-switch > input[type="checkbox"]:checked + label::before {background: inherit;opacity: 0.5;}
 .material-switch > input[type="checkbox"]:checked + label::after {background: inherit;left: 20px;}
 .list-group-item.active a{color: white;}
-.form-control,.label,.input-group-addon,.btn{border-radius: 0;}
+.form-control,.input-group-addon,.btn{border-radius: 0;}
 /**/
 .realtime{position: fixed;right: 0;top:0px;width: 250px;height: 100%;z-index: 999;}
 .realtime >div{border-right: none;border-radius: 0;}
@@ -72,3 +72,7 @@ body{
 .realtime >div.log li.list-group-item div.pull-right span.glyphicon.glyphicon-edit{top: 6px;}
 .realtime >div.log li .badge{background-color: red;}
 .realtime >div.log li.list-group-item div.pull-right span.time{font-size: 13px;color: #565656;padding-right: 10px;vertical-align: -2px;}
+
+/*chatsModal*/
+#chatsModal .list-group .list-group-item{border-top: none;}
+#chatsModal .list-group .list-group-item >div{}

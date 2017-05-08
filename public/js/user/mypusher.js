@@ -1,6 +1,7 @@
 var pusher = new Pusher("6f9b209ae778821b0ef1")
 var channel = pusher.subscribe('active-channel');
 $(document).ready(function() {
+    var channel_chat = pusher.subscribe($('input[name="my_chat_chanel"]').val());
     channel.bind('online-event', function(data) {
         if($('ul#list-online li#online_'+data.user.id).length){
             var el = $('ul#list-online li#online_'+data.user.id);
@@ -54,5 +55,14 @@ $(document).ready(function() {
     });
     channel.bind('indexPostEvent', function(data) {
         $('table tr td[user-id='+data.log.user_id+'] label').remove();
+    });
+    channel_chat.bind('chat-event', function(data) {
+        $('#chatsModal').modal('show');
+        var domHtml = '<li class="list-group-item clearfix">'+
+                        '<div class="text-left"><span class="label label-primary">'+data.text+'</span></div>'+
+                    '</li>';
+        var elli = $(domHtml);
+        $('#chatsModal input[name="your_chat_chanel"]').val(data.my_chat_chanel)
+        $('div#chatsModal ul.list-group').append(elli).find(elli).slideDown();
     });
 });

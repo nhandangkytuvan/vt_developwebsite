@@ -48,4 +48,36 @@ $(document).ready(function() {
     	timepicker:false,
     	format:'d.m.Y',
     });
+    //open modal chat
+    $('#list-online').on('click', 'li', function(event) {
+    	event.preventDefault();
+    	var name_user = $(this).text();
+    	$('#chatsModal span.label.label-success').text(name_user);
+    	$('#chatsModal input[name="your_chat_chanel"]').val($(this).attr('id'));
+    });
+
+    var options = { 
+        beforeSubmit:  showRequest,
+        success:       showResponse
+    }; 
+    $('#chatsModal').ajaxForm(options); 
 });
+// pre-submit callback 
+function showRequest(formData, jqForm, options) { 
+	for (var i=0; i < formData.length; i++) { 
+        if (!formData[i].value) { 
+            alert('Vui lòng nhập tin nhắn !'); 
+            return false; 
+        } 
+    } 
+    return true; 
+} 
+// post-submit callback 
+function showResponse(responseText, statusText, xhr, $form)  { 
+    var domHtml = '<li class="list-group-item clearfix">'+
+                        '<div class="text-right"><span class="label label-success">'+responseText+'</span></div>'+
+                    '</li>';
+    var elli = $(domHtml);
+    $('#chatsModal ul.list-group').append(elli).find(elli).slideDown();
+	$form.find('textarea').val('');
+} 

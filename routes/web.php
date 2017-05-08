@@ -52,3 +52,5 @@ Route::any('setRandomName','Web\TestController@setRandomName');
 Route::any('resetNumberTuvan','Web\TestController@resetNumberTuvan');
 Route::any('setNumberTuvan','Web\TestController@setNumberTuvan');
 Route::any('test/seo','Web\TestController@seo');
+// Chats
+Route::any('chats/send','Web\ChatController@send');
