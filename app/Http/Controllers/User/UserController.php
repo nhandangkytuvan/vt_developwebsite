@@ -8,6 +8,7 @@ use App\Setting;
 use App\Online;
 use Session;
 use Hash;
+use Illuminate\Support\Facades\Log;
 class UserController extends Controller{
 	public function create(Request $request){
 		if ($request->isMethod('post')) {
@@ -37,6 +38,7 @@ class UserController extends Controller{
 		event(new UserOnlineEvent($user,'offline'));
 		Session::forget('user');
 		Session::flash('info','Hẹn gặp lại.');
+		Log::info('offline');
 		return redirect('/');
 	}
 	public function password(Request $request){

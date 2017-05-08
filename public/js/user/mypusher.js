@@ -8,6 +8,7 @@ $(document).ready(function() {
                 el.find('i').addClass('active');
             }else{
                 el.find('i').removeClass('active');
+                $('table tr td[user-id='+data.user.id+'] label').remove();
             }
         }else{
             var elul = $('#list-online');
@@ -15,6 +16,7 @@ $(document).ready(function() {
                 var elh5 = $("<h5></h5>").html('<i class="fa fa-circle active"></i> '+data.user.user_name);
             }else{
                 var elh5 = $("<h5></h5>").html('<i class="fa fa-circle"></i> '+data.user.user_name);
+                $('table tr td[user-id='+data.user.id+'] label').remove();
             }
             var elli = $("<li></li>").addClass('list-group-item').attr('id','online_'+data.user.id);
             elli.append(elh5).hide();
