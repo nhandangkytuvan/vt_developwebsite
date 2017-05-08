@@ -58,9 +58,15 @@ $(document).ready(function() {
 
     var options = { 
         beforeSubmit:  showRequest,
-        success:       showResponse
+        success:       showResponse,
     }; 
-    $('#chatsModal').ajaxForm(options); 
+    $('#formChats').ajaxForm(options); 
+    $('#formChats textarea').keydown(function(event) {
+	    if (event.keyCode == 13) {
+	        $('#formChats').ajaxSubmit(options); 
+	        return false; 
+	    }
+	});
 });
 // pre-submit callback 
 function showRequest(formData, jqForm, options) { 

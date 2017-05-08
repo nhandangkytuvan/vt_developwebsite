@@ -156,26 +156,14 @@
         </div>
     </div>
     @endif
-    <div class="modal fade" id="chatsModal" role="dialog">
-        <div class="modal-dialog">
+    <div class="modal fade" id="chatsModal" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
             <div class="panel panel-default" role="document">
                 <div class="panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Chats vs <span class="label label-success">hanh</span></h4>
                 </div>
                 <ul class="list-group">
-                    <!-- <li class="list-group-item clearfix">
-                        <div class="pull-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit maiores incidunt quidem.</div>
-                    </li>
-                    <li class="list-group-item clearfix">
-                        <div class="pull-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit maiores incidunt quidem.</div>
-                    </li>
-                    <li class="list-group-item clearfix">
-                        <div class="pull-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit maiores incidunt quidem.</div>
-                    </li>
-                    <li class="list-group-item clearfix">
-                        <div class="pull-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit maiores incidunt quidem.</div>
-                    </li> -->
                 </ul>
                 <div class="panel-footer">
                     <form action="{{ url('chats/send') }}" method="post" id="formChats">
@@ -183,10 +171,6 @@
                         <input type="hidden" name="my_chat_chanel" value="online_{{ Session::has('user') ? Session::get('user')->id : '' }}">
                         <div class="form-group">
                             <textarea name="chat_content" class="form-control autosize" placeholder="Nhập tin nhắn..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Gửi tin</button>
-                            <button class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>

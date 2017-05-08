@@ -59,7 +59,7 @@ body{
 .material-switch > input[type="checkbox"]:checked + label::before {background: inherit;opacity: 0.5;}
 .material-switch > input[type="checkbox"]:checked + label::after {background: inherit;left: 20px;}
 .list-group-item.active a{color: white;}
-.form-control,.input-group-addon,.btn{border-radius: 0;}
+/*.form-control,.input-group-addon{border-radius: 0;}*/
 /**/
 .realtime{position: fixed;right: 0;top:0px;width: 250px;height: 100%;z-index: 999;}
 .realtime >div{border-right: none;border-radius: 0;}
